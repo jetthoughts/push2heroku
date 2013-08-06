@@ -10,8 +10,10 @@ module Push2heroku
 
     def settings(branch_name)
       common_hash = hash['common'] || {}
+      branch_hash = hash['branch'] || {}
       env_hash = hash[branch_name.to_s] || {}
-      final_hash = common_hash.deep_merge(env_hash)
+      final_hash = common_hash.deep_merge(branch_hash)
+      final_hash = final_hash.deep_merge(env_hash)
       Hashr.new(final_hash)
     end
 
